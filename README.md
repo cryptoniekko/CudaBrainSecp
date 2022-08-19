@@ -9,8 +9,9 @@ System design can be illustrated with data-flow diagram:
 
 ## :heavy_check_mark: When to use CudaBrainSecp
 CudaBrainSecp is most useful **when private keys can not be derived from each-other.**<br>
-In the example diagram an extra calculation **Sha256 Transform** is done before Secp256k1.<br>
-This calculation makes it (nearly) impossible to guess the previous or the next private key.<br>
+In the example diagram an extra calculation **Sha256Transform** is done before Secp256k1.<br>
+Sha256 function hashes the private key before it is passed to Secp256k1 function.<br>
+This means that multiple private keys can not be derived from each-other. (since hashes are non-reversable)<br>
 In such cases CudaBrainSecp is very useful as it performs full Point Multiplication on each thread.<br>
 This includes:
 - Brain Wallets
