@@ -114,7 +114,7 @@ But it's extremely fast and much faster than than the [Chuda-Hashing-Algos imple
 The main problem for doing Point Multiplication on GPUs is that it's simply too many calculations.<br>
 To multiply Secp256k1 point G with scalar you have to perform ~255 Point-Doubling operations and ~127 Point-Addition operations.<br>
 Each Point-Doubling and Point-Addition operation has several expensive `mul_mod` / `add_mod` / `sub_mod` operations.<br>
-This is computationally very intensive for one kernel thread to handle. (especially with limiter register / memory size)<br>
+This is computationally very intensive for one kernel thread to handle. (especially with limited register / memory size)<br>
 However all of the values in Secp256k1 calculations (except for the scalar vector) are constant and never change.<br>
 This allows pre-computing some values and passing them to kernel directly. (either through global memory or constants)<br>
 In this implementation i chose to pre-compute 16 chunks, 2-bytes each, for a total of 1048576 Points. (taking ~67MB of space)<br>
@@ -177,7 +177,7 @@ Basically the threads have to wait until some device registers are finally avail
 ## :heavy_plus_sign: Optimizations
 ```diff
 + Wordlists
-Current implementation of CudaSecp relies hevily on wordlists.
+Current implementation of CudaSecp relies heavily on wordlists.
 I believe the current setup is efficient, as it only loads Affix word once, and Prime words should have coalescing.
 However the test setup only has 100 Prime words and with large amount of words you could encounter slower performance.
 If you plan on using large wordlists - consider splitting and passing them to GPU in smaller batches.
