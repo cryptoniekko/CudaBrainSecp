@@ -437,7 +437,7 @@ uint8_t input[64] = {};
 	input[5] = COMBO_SYMBOLS[combo[6]];
 	input[6] = COMBO_SYMBOLS[combo[5]];
 	input[7] = COMBO_SYMBOLS[combo[4]];
-	((uint32_t * )input)[15] = 48;
+	((uint32_t * )input)[15] = 56;
 #elif SIZE_COMBO_MULTI == 8
 	input[0] = COMBO_SYMBOLS[combo[3]];
 	input[1] = COMBO_SYMBOLS[combo[2]];
@@ -451,7 +451,7 @@ uint8_t input[64] = {};
 	input[9] = 0x00;
 	input[10] = 0x00;
 	input[11] = 0x80;
-	((uint32_t * )input)[15] = 56;
+	((uint32_t * )input)[15] = 64;
 #endif
 
 	output[7] = I[0];
